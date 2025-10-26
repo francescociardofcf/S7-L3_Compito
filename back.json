@@ -1,0 +1,29 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "The Art of Code",
+      "author": "Alice Johnson"
+    },
+    {
+      "id": 2,
+      "title": "Journey Through JSON",
+      "author": "Marco Rossi"
+    },
+    {
+      "id": 3,
+      "title": "API Adventures",
+      "author": "Priya Patel"
+    },
+    {
+      "id": 4,
+      "title": "Learning with Data",
+      "author": "Chen Wei"
+    },
+    {
+      "id": 5,
+      "title": "Programming Patterns",
+      "author": "John Smith"
+    }
+  ]
+}
