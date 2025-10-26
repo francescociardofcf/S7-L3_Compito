@@ -31,6 +31,14 @@ button:hover {
     background-color: #005bb5;
 }
 
+img {
+    max-width: 100%;
+    align-items: flex-start;
+    display: flex;
+    height: auto;
+    object-fit: cover;
+}
+
 .container {
     width: 80%;
     margin: auto;

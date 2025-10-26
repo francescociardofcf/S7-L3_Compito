@@ -12,16 +12,33 @@ h1, h2, h3 {
 
 
 a {  
-    color: #0066cc;  
-    text-decoration: none;  
+    color: #4d83b8;  
+    transition: color 0.3s ease;  
+    
 }
 
 
 a:hover {  
-    text-decoration: underline;  
+    text-decoration: line-through;  
+    color: #003d66;
+
 }
 
-nav
+nav {  
+    background-color: #333;  
+    color: #fff;  
+    padding: 10px;  
+}
+nav a {  
+    color: #fff;  
+    margin-right: 15px;  
+    text-decoration: none;  
+}   
+
+nav a:hover {  
+    text-decoration: underline;  
+    color: #4d83b8;  
+}
 
 button {  
     background-color: #0066cc;  
