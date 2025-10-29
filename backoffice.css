@@ -1,9 +1,9 @@
 body {  
     margin: 0;  
     padding: 0;  
-    font-family: Arial, sans-serif;  
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;  
     background-color: #f4f4f4;  
-    color: #333;  
+    color: #f0e8e8;  
 }
 
 h1, h2, h3 {  
@@ -11,24 +11,6 @@ h1, h2, h3 {
 }   
 
 
-a {  
-    color: #4d83b8;  
-    transition: color 0.3s ease;  
-    
-}
-
-
-a:hover {  
-    text-decoration: line-through;  
-    color: #003d66;
-
-}
-
-nav {  
-    background-color: #333;  
-    color: #fff;  
-    padding: 10px;  
-}
 nav a {  
     color: #fff;  
     margin-right: 15px;  
@@ -41,12 +23,12 @@ nav a:hover {
 }
 
 button {  
-    background-color: #0066cc;  
-    color: #fff;  
+    background-color: #0de50d;  
+    color: #f0d8d8;  
     border: none;  
     padding: 10px 15px;  
     cursor: pointer;  
-}       
+}          
 
 button:hover {  
     background-color: #005bb5;  
@@ -56,5 +38,22 @@ button:hover {
     width: 80%;  
     margin: auto;  
     overflow: hidden;  
+}
+
+.row:after {
+    float: left;
+    padding: 10px;
+}
+.left {
+    width: 25%;
+}
+
+.right {
+    width: 75%;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 

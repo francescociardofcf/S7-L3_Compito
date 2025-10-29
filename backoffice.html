@@ -1,238 +1,249 @@
 <!DOCTYPE html>
 <html lang="it">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Backoffice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="./backoffice.css" />
-  </head>
-  <body>
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Backoffice</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="https://www.amazon.it">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Prodotti</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ordini</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Utenti</a>
-            </li>
-            
-           
-          </ul>
+    <link href="stylesheet" rel="./style.css" />
+    <style>
+      /* Piccole migliorie visive inline per non dipendere da file esterni */
+      body { background: #f8f9fa; }
+      .container { max-width: 1000px; }
+      .table td, .table th { vertical-align: middle; }
+    </style>
+  </head> 
+  <body> 
+    <div class="container mt-4">
+      <h2 class="mb-3">Products Management</h2>
+
+      <!-- Form per aggiungere prodotto -->
+      <form id="addProductForm" class="mb-3 row gx-2 gy-2 align-items-center">
+        <div class="col-md-4">
+          <input type="text" id="productName" class="form-control" placeholder="Product Name" required />
         </div>
-      </nav>
-      </div>
-    
-      <div class="col-3 lg-4 row-md-4 mb-3">
-        <h1 class="text-center mb-4"><a href="https://amazon.com" target="./index.html" rel=".#">
-              <button class="btn btn-info">Manage Your Checkout</button></h1>
-        <div id="products-table" class="table-responsive"></div>
+        <div class="col-md-3">
+          <input type="number" id="productPrice" class="form-control" placeholder="Price" step="0.01" required />
+        </div>
+        <div class="col-md-5 d-flex flex-wrap gap-2">
+          <button type="submit" class="btn btn-primary">Add Product</button>
+          <button type="button" id="btnLoadOne" class="btn btn-secondary">Load Random Product</button>
+          <button type="button" id="btnLoadMany" class="btn btn-success">Load Random Products</button>
+          <button type="button" id="btnClear" class="btn btn-outline-danger">Clear All</button>
+        </div>
+      </form>
+
+      <!-- Tabella prodotti -->
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th style="width:70px">ID</th>
+              <th>Name</th>
+              <th style="width:140px">Price</th>
+              <th style="width:210px">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody"></tbody>
+        </table>
       </div>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Prezzo</th>
-          <th>Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Laptop</td>
-          <td>1200</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Smartphone</td>
-          <td>800</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Headphones</td>
-          <td>150</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table">
-      <thead>
-        <tr>
-          <td>4</td>
-          <td>HM</td>
-          <td>55543$</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </thead>
-    </table>    
-    <table class="table">
-      <thead>
-        <tr>
-          <td>5</td>
-          <td>Cavalli</td>
-          <td>6666$</td>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>6</td>
-          <td>Chanel No. 5</td>
-          <td>1500$</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table">
-      <thead>
-        <tr>
-          <td>7</td>
-          <td>Gucci Bag</td>
-          <td>7000$</td>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </thead>
-    </table>
-    <table class="table">
-      <thead>
-        <tr>
-          <td>8</td>
-          <td>Treccani</td>
-          <td>1200£</td>
-          <td>
-            <button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button>
-            <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-            <button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-            <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-          </td>
-        </tr>
-      </thead>     
-      <tbody>
-        <tr>
-          <td>8</td>
-          <td>Treccani</td>
-          <td>1200£</td>
-          <td></td>   <!-- I prodotti verranno inseriti qui dinamicamente -->
-      </tbody>
-    </table>
-    <table class="table">
-      <thead>
-        <tr>
-          <td>9</td>
-          <td>HERO</td>
-          <td>45432£</td>
-          <td><button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button></td>
-          <td><button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button></td>
-          <td><button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button></td>
-          <td><button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button></td>
-        </tr>
-        
-      </thead>
-      <tbody>
-        <tr>
-          <td>9</td>
-          <td>HERO</td>
-          <td>45432£</td>
-          <td><button class="btn btn-warning" onclick="showEditProductModal('1','2','3','4','5','6','7','8')">Modifica</button></td>
-          <td><button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button></td>
-          <td><button class="btn btn-info" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button></td>
-        <td><button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button></td>
-      </tbody>
-    </table>      
-    <table class="table">
-      <tr>
-        <td>10</td>
-        <td>Rolex</td>
-        <td>15000£</td>
-      </tr>
-        <td>
-          <button class="btn btn-tertiary" onclick="showEditProductModal('1')">Modifica</button>
-          <button class="btn btn-danger" onclick="deleteProduct('1','2','3','4','5','6','7','8')">Elimina</button>
-          <button class="btn btn-secondary" onclick="showProductDetails('1','2','3','4','5','6','7','8')">Dettagli</button>
-          <button class="btn btn-success" onclick="buyProduct('1','2','3','4','5','6','7','8')">Compra</button>
-        </td>
-      </tr>
-      <tr>
-        <td>11</td>     
-        <td>1</td>
-        <td>Laptop</td>
-        <td>1200</td>
-      </tr>
-    </table>
-          <thead>
-        <tr>
-          <th>ID</th>
-          <th>Quantità</th>
-          <th>Nome</th>
-          <th>Prezzo</th>
-        </tr>
-          </thead>
-        </tr> 
-      </table>
-    <script src="./backoffice.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  
 
+    <script>
+      // Dati in memoria
+      let products = [];
+      let nextId = 1;
+
+      // Utilità: salva su localStorage
+      function saveProducts() {
+        localStorage.setItem('products', JSON.stringify(products));
+      }
+
+      // Utilità: carica da back.json (se esiste) -> fallback a [] handled
+      function loadFromBackJson() {
+        return fetch('./back.json')
+          .then(res => {
+            if (!res.ok) return [];
+            return res.json();
+          })
+          .then(data => Array.isArray(data) ? data : [])
+          .catch(() => []); // se errore, ritorna array vuoto
+      }
+
+      // Render della tabella senza innerHTML += (più sicuro)
+      function renderProducts() {
+        const tbody = document.getElementById('productsTableBody');
+        tbody.innerHTML = '';
+        products.forEach(p => {
+          const tr = document.createElement('tr');
+
+          const tdId = document.createElement('td');
+          tdId.textContent = p.id;
+          tr.appendChild(tdId);
+
+          const tdName = document.createElement('td');
+          tdName.textContent = p.name;
+          tr.appendChild(tdName);
+
+          const tdPrice = document.createElement('td');
+          tdPrice.textContent = `$${Number(p.price).toFixed(2)}`;
+          tr.appendChild(tdPrice);
+
+          const tdActions = document.createElement('td');
+
+          const btnEdit = document.createElement('button');
+          btnEdit.className = 'btn btn-warning btn-sm me-2';
+          btnEdit.textContent = 'Edit';
+          btnEdit.addEventListener('click', () => editProduct(p.id));
+          tdActions.appendChild(btnEdit);
+
+          const btnDelete = document.createElement('button');
+          btnDelete.className = 'btn btn-danger btn-sm';
+          btnDelete.textContent = 'Delete';
+          btnDelete.addEventListener('click', () => deleteProduct(p.id));
+          tdActions.appendChild(btnDelete);
+
+          tr.appendChild(tdActions);
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      // Aggiungi prodotto manuale
+      document.getElementById('addProductForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('productName').value.trim();
+        const priceVal = document.getElementById('productPrice').value;
+        const price = parseFloat(priceVal);
+        if (!name || isNaN(price)) {
+          return alert('Inserisci nome e prezzo validi');
+        }
+        const product = { id: nextId++, name, price };
+        products.push(product);
+        saveProducts();
+        renderProducts();
+        e.target.reset();
+      });
+
+      // Edit
+      function editProduct(id) {
+        const p = products.find(x => x.id === id);
+        if (!p) return;
+        const newName = prompt('Edit product name:', p.name);
+        if (newName === null) return; // annullato
+        const newPriceRaw = prompt('Edit product price:', p.price);
+        if (newPriceRaw === null) return;
+        const parsed = parseFloat(newPriceRaw);
+        p.name = newName.trim() || p.name;
+        if (!isNaN(parsed)) p.price = parsed;
+        saveProducts();
+        renderProducts();
+      }
+      // Delete
+      function deleteProduct(id) {
+        if (!confirm('Sei sicuro di voler eliminare questo prodotto?')) return;
+        products = products.filter(p => p.id !== id);
+        saveProducts();
+        renderProducts();
+      }
+
+      // Carica UN prodotto random (aggiunge uno nuovo con nextId)
+      async function fetchRandomProduct() {
+        try {
+          const res = await fetch('https://dummyjson.com/products');
+          if (!res.ok) throw new Error('Fetch failed');
+          const data = await res.json();
+          const list = Array.isArray(data.products) ? data.products : [];
+          if (!list.length) return alert('Nessun prodotto disponibile da dummyjson');
+          const random = list[Math.floor(Math.random() * list.length)];
+          const product = { id: nextId++, name: random.title || 'Untitled', price: parseFloat(random.price) || 0 };
+          products.push(product);
+          saveProducts();
+          renderProducts();
+        } catch (err) {
+          console.error(err);
+          alert('Errore nel caricamento prodotto casuale. Controlla la console.');
+        }
+      }
+
+      // Carica TUTTI i prodotti dal servizio e li importa => assegna nuovi id locali per evitare collisioni
+      async function fetchRandomProducts() {
+        try {
+          const res = await fetch('https://dummyjson.com/products');
+          if (!res.ok) throw new Error('Fetch failed');
+          const data = await res.json();
+          const list = Array.isArray(data.products) ? data.products : [];
+          if (!list.length) return alert('Nessun prodotto disponibile da dummyjson');
+          // Mappiamo assegnando nuovi id locali (per evitare conflitti con id già presenti)
+          const imported = list.map(item => ({
+            id: nextId++,
+            name: item.title || 'Untitled',
+            price: parseFloat(item.price) || 0
+          }));
+          // Qui decidiamo se unire o sostituire: uniamo (concat) ma si può cambiare per sostituire
+          products = products.concat(imported);
+          saveProducts();
+          renderProducts();
+        } catch (err) {
+          console.error(err);
+          alert('Errore nel caricamento prodotti casuali. Controlla la console.');
+        }
+      }
+
+      // Svuota tutto
+      function clearAll() {
+        if (!confirm('Vuoi davvero svuotare completamente la lista prodotti e cancellare il localStorage?')) return;
+        products = [];
+        nextId = 1;
+        saveProducts();
+        renderProducts();
+      }
+
+      // Esporre alcune funzioni se l'utente vuole usarle dalla console
+      window.fetchRandomProduct = fetchRandomProduct;
+      window.fetchRandomProducts = fetchRandomProducts;
+      window.clearAllProducts = clearAll;
+
+      // Event listeners per i bottoni (senza onclick inline)
+      document.getElementById('btnLoadOne').addEventListener('click', fetchRandomProduct);
+      document.getElementById('btnLoadMany').addEventListener('click', fetchRandomProducts);
+      document.getElementById('btnClear').addEventListener('click', clearAll);
+
+      // Inizializzazione: carica da localStorage, altrimenti da back.json, altrimenti vuoto
+      (async function init() {
+        const saved = localStorage.getItem('products');
+        if (saved) {
+          try {
+            products = JSON.parse(saved) || [];
+            nextId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
+            renderProducts();
+            return;
+          } catch (err) {
+            console.warn('Errore parsing localStorage, ricarico da back.json', err);
+          }
+        }
+        // se non c'è localStorage valido, proviamo a caricare back.json e poi salviamo
+        const fromJson = await loadFromBackJson();
+        if (Array.isArray(fromJson) && fromJson.length) {
+          // assicurati che ogni item abbia id, name, price
+          products = fromJson.map((it, idx) => {
+            return {
+              id: (typeof it.id === 'number' && it.id > 0) ? it.id : nextId++,
+              name: it.name || it.title || `Product ${idx + 1}`,
+              price: parseFloat(it.price) || (parseFloat(it.price) === 0 ? 0 : (it.price ? parseFloat(it.price) : 0))
+            };
+          });
+          nextId = products.length ? Math.max(...products.map(p => p.id)) + 1 : nextId;
+          saveProducts();
+        } else {
+          products = [];
+          nextId = 1;
+        }
+        renderProducts();
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
